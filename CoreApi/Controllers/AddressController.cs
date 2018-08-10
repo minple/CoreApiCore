@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreApi.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class AddressController : ControllerBase
@@ -32,15 +32,19 @@ namespace CoreApi.Controllers
                                 from c in _context.Country
                                 from ci in _context.City
                                 from d in _context.District
+                                from at in _context.AddressType
                                 where a.CountryId == c.Id &&
                                         a.CityId == ci.Id &&
-                                        a.DistrictId == d.Id
+                                        a.DistrictId == d.Id &&
+                                        a.AddressTypeId == at.Id
                                 select new
                                 {
                                     UserName = u.Name,
-                                    Country = c.Name,
+                                    Street = a.Street,
+                                    AddressType = at.Name,
+                                    District = d.Name,
                                     City = ci.Name,
-                                    District = d.Name
+                                    Country = c.Name,
                                 };
             return result;
         }
@@ -69,16 +73,21 @@ namespace CoreApi.Controllers
                                 from c in _context.Country
                                 from ci in _context.City
                                 from d in _context.District
+                                from at in _context.AddressType
                                 where a.CountryId == c.Id &&
                                         a.CityId == ci.Id &&
                                         a.DistrictId == d.Id &&
+                                        a.AddressTypeId == at.Id &&
 
                                         u.Id == id
                                 select new
                                 {
-                                    Country = c.Name,
+                                    Street = a.Street,
+                                    AddressType = at.Name,
+                                    District = d.Name,
                                     City = ci.Name,
-                                    District = d.Name
+                                    Country = c.Name,
+                                    
                                 };
             IQueryable userAddresses;
             userAddresses = from u in _context.Users
