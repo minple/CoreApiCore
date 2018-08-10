@@ -23,14 +23,6 @@ namespace CoreApi.Controllers
         public UsersController(CoreApiContext context)
         {
             _context = context;
-        } 
-
-        [HttpGet("{id}")]
-        public ActionResult GetAllUsers(int id) {
-            IQueryable user;
-            user = _context.Users.Where( us => us.Id == id);
-
-            return Ok(user);
         }
 
         [HttpGet(Name = "GetUsers")]
@@ -119,6 +111,7 @@ namespace CoreApi.Controllers
                     else {
                         UsersData.Error.Id = 500;
                         UsersData.Error.Message = "No Success! Please check your infomation that you sent!";
+                        UsersData.Pagination = null;
                     }
                 }
             }
@@ -133,7 +126,7 @@ namespace CoreApi.Controllers
             return Response;
         }
         
-        [HttpGet("a/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetUserFromId(int id) {
             UsersData UsersData = new UsersData();
 

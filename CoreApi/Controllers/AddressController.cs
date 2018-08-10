@@ -9,15 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreApi.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressController : ControllerBase
+    public class AddressesController : ControllerBase
     {
         private readonly CoreApiContext _context;
-        public AddressController(CoreApiContext contex)
+        public AddressesController(CoreApiContext context)
         {
-            _context = contex;
+            _context = context;
         }
 
         [HttpGet]

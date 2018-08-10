@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoreApi.DTO {
@@ -10,6 +11,5 @@ namespace CoreApi.DTO {
             public string Password { get; set; }
             public int Address1 { get; set; }
             public int Address2 { get; set; }
-            
         }
 }
